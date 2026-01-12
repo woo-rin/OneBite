@@ -7,3 +7,4 @@ function returnTrue(){
     return true;
 }
 console.log(returnFalse()&&returnTrue());
+console.log("안녕하세요")
