@@ -1,22 +1,23 @@
 import './App.css';
 import { useState } from 'react';
 
-function App() {
+const Bulb = ({ light }) => {
+  return (
+    <div>
+      {light === 'ON' ? (
+        <h1 style={{ backgroundColor: 'orange' }}>ON</h1>
+      ) : (
+        <h1 style={{ backgroundColor: 'gray' }}>OFF</h1>
+      )}
+    </div>
+  );
+};
+
+const Counter = () => {
   const [count, setState] = useState(0);
-  const [light, setLight] = useState('off');
 
   return (
     <>
-      <div>
-        <h1>{light}</h1>
-        <button
-          onClick={() => {
-            setLight(light === 'ON' ? 'OFF' : 'ON');
-          }}
-        >
-          {light === 'ON' ? 'OFF' : 'ON'}
-        </button>
-      </div>
       <h1>{count}</h1>
       <button
         onClick={() => {
@@ -25,6 +26,26 @@ function App() {
       >
         +
       </button>
+    </>
+  );
+};
+
+function App() {
+  const [light, setLight] = useState('OFF');
+
+  return (
+    <>
+      <div>
+        <Bulb light={light}></Bulb>
+        <button
+          onClick={() => {
+            setLight(light === 'ON' ? 'OFF' : 'ON');
+          }}
+        >
+          {light === 'ON' ? 'OFF' : 'ON'}
+        </button>
+      </div>
+      <Counter />
     </>
   );
 }
