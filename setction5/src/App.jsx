@@ -1,22 +1,32 @@
-import './App.css'
-import Button from './components/Button'
+import './App.css';
+import { useState } from 'react';
 
-function App(){
-  const buttonprops = {
-    text: "메일",
-    color: "red",
-    a:1,
-    b:2,
-  };
-  return(
+function App() {
+  const [count, setState] = useState(0);
+  const [light, setLight] = useState('off');
+
+  return (
     <>
-      <Button {...buttonprops}/>
-      <Button text={"cafe"}/>
-      <Button text={"blog"}>
-        <div>자식요소</div>
-      </Button >
+      <div>
+        <h1>{light}</h1>
+        <button
+          onClick={() => {
+            setLight(light === 'ON' ? 'OFF' : 'ON');
+          }}
+        >
+          {light === 'ON' ? 'OFF' : 'ON'}
+        </button>
+      </div>
+      <h1>{count}</h1>
+      <button
+        onClick={() => {
+          setState(count + 1);
+        }}
+      >
+        +
+      </button>
     </>
   );
 }
 
-export default App
+export default App;
