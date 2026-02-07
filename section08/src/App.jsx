@@ -8,7 +8,7 @@ function App() {
     {
       id: 0,
       isDone: false,
-      content: 'React study',
+      content: '리액트 공부 study',
       date: new Date().getTime(),
     },
     {
@@ -41,7 +41,7 @@ function App() {
     <div className="App">
       <Header />
       <Editor onCreate={onCreate} />
-      <List />
+      <List todos={todos} />
     </div>
   );
 }
