@@ -12,7 +12,7 @@ const List = ({ todos }) => {
       return todos;
     }
     return todos.filter((todo) =>
-      todo.content.toLoweCase().includes(search.toLowerCase),
+      todo.content.toLowerCase().includes(search.toLowerCase()),
     );
   };
   getFilteredData();
