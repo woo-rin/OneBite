@@ -1,4 +1,11 @@
+import { useSearchParams } from 'react-router-dom';
 const Home = () => {
-  return <></>;
+  const [params, setParms] = useSearchParams();
+
+  return (
+    <div>
+      {params},{setParms}
+    </div>
+  );
 };
 export default Home;
