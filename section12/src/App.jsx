@@ -1,11 +1,13 @@
 import './App.css';
+import Button from './components/button';
+import Header from './components/Header';
 import { Route, Routes, Link, useNavigate } from 'react-router-dom';
 import Home from './Pages/Home';
 import Diary from './Pages/Diary';
 import New from './Pages/New';
 import Notfound from './Pages/Notfound';
 
-import { genEmotionImage } from './util/get-emtion-image';
+// import { genEmotionImage } from './util/get-emtion-image';
 
 //1. "/" : 모든일기를 죄회하는 HOMe
 //2. "/new": 새로운 일기를 작성하는 new
@@ -19,18 +21,14 @@ function App() {
   };
   return (
     <>
-      <div>
-        <img src={genEmotionImage(1)} />
-        <img src={genEmotionImage(2)} />
-        <img src={genEmotionImage(3)} />
-        <img src={genEmotionImage(4)} />
-        <img src={genEmotionImage(5)} />
-      </div>
-      <div>
-        <Link to={'/'}>Home</Link>
-        <Link to={'/new'}>New</Link>
-        <Link to={'/diary'}>Diary</Link>
-      </div>
+      <Header
+        title={'Header'}
+        lefchild={<Button></Button>}
+        rightchild={<Button></Button>}
+      />
+      <Button text={'123'} type={'DEFAULT'} />
+      <Button text={'456'} type={'POSTIVE'} />
+      <Button text={'789'} type={'NEGATIVE'} />
       <button onClick={onClickButton}>New 페이지로 이동</button>
       <Routes>
         <Route path="/" element={<Home />} />
