@@ -52,8 +52,8 @@ type Person = {
   language: string;
 };
 
-type Intersection = Dog & Person;
-let Intersection1: Intersection = {
-  name: '',
-  color: '',
-};
+// type Intersection = Dog & Person;
+// let Intersection1: Intersection = {
+//   name: '',
+//   color: '',
+// };
