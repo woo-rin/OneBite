@@ -13,4 +13,10 @@ let doubleArr = [
 //길이와 타입이 고정된 배열
 let tup1 = [1, 2];
 let tup3 = [1, '1', true];
+const users = [
+    ['woo', 1],
+    ['lee', 2],
+    ['rin', 3],
+    // [4, 'kim'],
+];
 export {};
