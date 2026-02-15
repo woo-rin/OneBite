@@ -7,7 +7,7 @@ function func1(): string {
 }
 
 function func2(): void {
-  console.log('hell0');
+  console.log('hello');
 }
 
 //never
