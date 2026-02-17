@@ -28,10 +28,6 @@ let dog: Dog = {
 animal = dog;
 // dog = animal;
 
-type Book = {
-  name: string;
-  price: number;
-};
 type programmingBook = {
   name: string;
   price: number;
