@@ -54,6 +54,6 @@ type Func1 = (a: number, b: number) => void;
 type Func2 = (a: number) => number;
 
 let func1: Func1 = (a, b) => {};
-let func2: Func2 = (a) => {};
+// let func2: Func2 = (a) => {};
 
-func1 = func2;
+// func1 = func2;
