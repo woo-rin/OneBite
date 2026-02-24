@@ -18,6 +18,17 @@ function App() {
       <div className="m-5 h-50 w-50 bg-red-400 p-5">
         <div className="h-full w-full bg-blue-500">dlxjsjf tbrj</div>
       </div>
+      {/** 5.보더 */}
+      <div className="m-5 rounded-2xl border-x-2 border-y-5 border-red-500">
+        dd
+      </div>
+      {/** 6.플렉스 켄테이너 */}
+      <div className="flex-1items-center flex flex-col justify-around">
+        <div className="h-20 border">1</div>
+        <div className="h-30 border">1</div>
+        <div className="h-40 border">1</div>
+        <div className="h-10 border">1</div>
+      </div>
     </div>
   );
 }
