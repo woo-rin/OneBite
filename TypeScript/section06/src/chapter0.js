@@ -42,7 +42,7 @@ class StudentDeveloper {
         this.name = name;
         this.grade = grade;
         this.age = age;
-        this.favoriteskill =favoriteskill;
-        this.smrmaal debugger, clfsi qjw; Wjdrtmakd d[ wk qlrgid;toString,s tkr d;el]
+        this.favoriteskill =favoriteskill;c
+        this.smrmaal debugger
     }
 }
