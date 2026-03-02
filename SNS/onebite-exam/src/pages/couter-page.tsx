@@ -1,15 +1,12 @@
-import { usecountStore } from "@/store/count";
-import { Button } from "@/components/ui/button";
+import Viwewr from "@/components/ui/counter/viewer";
+import Controller from "@/components/ui/counter/cntroller";
 
 export default function Counter() {
-  const { count, increase, decrease } = usecountStore();
   return (
-    <div>
-      <div>{count}</div>
-      <div>
-        <Button onClick={decrease}>-</Button>
-        <Button onClick={increase}>+</Button>
-      </div>
+    <div className="text-4xl font-bold">
+      counter
+      <Viwewr />
+      <Controller />
     </div>
   );
 }
