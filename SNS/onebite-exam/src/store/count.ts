@@ -1,29 +1,61 @@
 import { create } from "zustand";
-import { Combine } from "lucide-react";
-import { combine } from "zustand/middleware";
+import {
+  combine,
+  subscribeWithSelector,
+  persist,
+  createJSONStorage,
+  devtools,
+} from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 
 export const usecountStore = create(
-  immer(
-    combine({ count: 0 }, (set, get) => ({
-      actions: {
-        increase: () => {
-          const count = get().count;
-          set({
-            count: count + 1,
-          });
-          set((state) => {
-            state.count += 0;
-          });
-        },
-        decrease: () => {
-          set((state) => {
-            state.count -= 1;
-          });
-        },
+  devtools(
+    persist(
+      subscribeWithSelector(
+        immer(
+          combine({ count: 0 }, (set, get) => ({
+            actions: {
+              increase: () => {
+                const count = get().count;
+                set({
+                  count: count + 1,
+                });
+                set((state) => {
+                  state.count += 0;
+                });
+              },
+              decrease: () => {
+                set((state) => {
+                  state.count -= 1;
+                });
+              },
+            },
+          })),
+        ),
+      ),
+      {
+        name: "countstore",
+        partialize: (store) => ({
+          count: store.count,
+        }),
+        storage: createJSONStorage(() => sessionStorage),
       },
-    })),
+    ),
+    {
+      name: "countStore",
+    },
   ),
+);
+
+usecountStore.subscribe(
+  (store) => store.count,
+  (count, prevCount) => {
+    // Listener
+    console.log(count, prevCount);
+
+    const store = usecountStore.getState();
+    // usecountStore.setState((store) => {});
+  },
 );
 
 // export const usecountStore = create<Store>((set, get) => ({
