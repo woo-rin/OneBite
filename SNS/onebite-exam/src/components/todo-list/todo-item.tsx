@@ -18,7 +18,6 @@ export default function TodoItem({
   return (
     <div className="flex items-center justify-between border p-2">
       <Link to={`/todolist/${id}`}>{content}</Link>
-
       <Button onClick={handleDeleteClick} variant={"destructive"}>
         삭제
       </Button>
