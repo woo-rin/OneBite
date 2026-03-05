@@ -8,23 +8,19 @@ import {
 } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 
-export const usecountStore = create(
+export const useCountStore = create(
   devtools(
     persist(
       subscribeWithSelector(
         immer(
           combine({ count: 0 }, (set, get) => ({
             actions: {
-              increase: () => {
-                const count = get().count;
-                set({
-                  count: count + 1,
-                });
+              increaseOne: () => {
                 set((state) => {
-                  state.count += 0;
+                  state.count += 1;
                 });
               },
-              decrease: () => {
+              decreaseOne: () => {
                 set((state) => {
                   state.count -= 1;
                 });
@@ -34,7 +30,7 @@ export const usecountStore = create(
         ),
       ),
       {
-        name: "countstore",
+        name: "countStore",
         partialize: (store) => ({
           count: store.count,
         }),
@@ -47,30 +43,26 @@ export const usecountStore = create(
   ),
 );
 
-usecountStore.subscribe(
+useCountStore.subscribe(
   (store) => store.count,
   (count, prevCount) => {
-    // Listener
+    // Listner
     console.log(count, prevCount);
 
-    const store = usecountStore.getState();
-    // usecountStore.setState((store) => {});
+    const store = useCountStore.getState();
+    // useCountStore.setState((store)=>({ }))
   },
 );
 
-// export const usecountStore = create<Store>((set, get) => ({
+// export const useCountStore = create<Store>((set, get) => ({
 //   count: 0,
 //   actions: {
-//     increase: () => {
-//       const count = get().count;
-//       set({
-//         count: count + 1,
-//       });
+//     increaseOne: () => {
 //       set((store) => ({
-//         count: store.count,
+//         count: store.count + 1,
 //       }));
 //     },
-//     decrease: () => {
+//     decreaseOne: () => {
 //       set((store) => ({
 //         count: store.count - 1,
 //       }));
@@ -79,16 +71,16 @@ usecountStore.subscribe(
 // }));
 
 export const useCount = () => {
-  const count = usecountStore((Store) => Store.count);
+  const count = useCountStore((store) => store.count);
   return count;
 };
 
 export const useIncreaseCount = () => {
-  const increase = usecountStore((store) => store.actions.increase);
+  const increase = useCountStore((store) => store.actions.increaseOne);
   return increase;
 };
 
 export const useDecreaseCount = () => {
-  const decrease = usecountStore((store) => store.actions.decrease);
+  const decrease = useCountStore((store) => store.actions.decreaseOne);
   return decrease;
 };

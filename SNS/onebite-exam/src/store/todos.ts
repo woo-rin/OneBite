@@ -2,24 +2,24 @@ import { create } from "zustand";
 import { combine } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import type { Todo } from "@/types";
-const initialstate: {
+
+const initialState: {
   todos: Todo[];
 } = {
   todos: [],
 };
-const useTodoStore = create(
+
+const useTodosStore = create(
   immer(
-    combine(initialstate, (set) => ({
+    combine(initialState, (set) => ({
       actions: {
-        createTodo: {
-          createTodo: (content: string) => {
-            set((state) => {
-              state.todos.push({
-                id: new Date().getTime(),
-                content: content,
-              });
+        createTodo: (content: string) => {
+          set((state) => {
+            state.todos.push({
+              id: new Date().getTime(),
+              content: content,
             });
-          },
+          });
         },
         deleteTodo: (targetId: number) => {
           set((state) => {
@@ -31,17 +31,17 @@ const useTodoStore = create(
   ),
 );
 
-export const useTodo = () => {
-  const todos = useTodoStore((store) => store.todos);
+export const useTodos = () => {
+  const todos = useTodosStore((store) => store.todos);
   return todos;
 };
 
 export const useCreateTodo = () => {
-  const createTodo = useTodoStore((store) => store.actions.createTodo);
+  const createTodo = useTodosStore((store) => store.actions.createTodo);
   return createTodo;
 };
 
 export const useDeleteTodo = () => {
-  const deleteTodo = useTodoStore((store) => store.actions.deleteTodo);
+  const deleteTodo = useTodosStore((store) => store.actions.deleteTodo);
   return deleteTodo;
 };
