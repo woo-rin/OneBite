@@ -32,4 +32,4 @@ function getLength<T extends { length: number }>(data: T) {
 let var1 = getLength([1, 2, 4]);
 let var2 = getLength('');
 let var3 = getLength({ length: 10 });
-let var4 = getLength(10);
+//let var4 = getLength(10);
