@@ -1,14 +1,25 @@
 import { updateTodo } from "@/api/update-todo";
 import { QUERY_KEYS } from "@/lib/constants";
 import type { Todo } from "@/types";
-import { useMutation, useQueries, useQueryClient } from "@tanstack/react-query";
+import {
+  QueriesObserver,
+  useMutation,
+  useQueries,
+  useQueryClient,
+} from "@tanstack/react-query";
+import type { Variable } from "lucide-react";
 
 export function useUpdateTodoMutation() {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: updateTodo,
-    onMutate: (updatedTodo) => {
+    onMutate: async (updatedTodo) => {
+      await queryClient.cancelQueries({
+        queryKey: QUERY_KEYS.todo.list,
+      });
+
+      const prevTodos = queryClient.getQueryData<Todo[]>(QUERY_KEYS.todo.list);
       queryClient.setQueryData<Todo[]>(QUERY_KEYS.todo.list, (prevTodos) => {
         if (!prevTodos) return [];
         return prevTodos.map((prevTodo) =>
@@ -16,6 +27,23 @@ export function useUpdateTodoMutation() {
             ? { ...prevTodo, ...updatedTodo }
             : prevTodo,
         );
+      });
+
+      return {
+        prevTodos,
+      };
+    },
+    onError: (error, Variable, context) => {
+      if (context && context.prevTodos) {
+        queryClient.setQueryData<Todo[]>(
+          QUERY_KEYS.todo.list,
+          context.prevTodos,
+        );
+      }
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.todo.list,
       });
     },
   });
