@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchTodoByid } from "@/api/fetch-to-do-by-id";
+
 import { QUERY_KEYS } from "@/lib/constants";
 
 export function useTodoDataById(id: string) {
@@ -10,4 +10,7 @@ export function useTodoDataById(id: string) {
     staleTime: 3000000,
     gcTime: 5000,
   });
+}
+function fetchTodoByid(id: string): any {
+  throw new Error("Function not implemented.");
 }
