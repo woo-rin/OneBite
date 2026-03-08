@@ -6,43 +6,8 @@
       "isDone": true
     },
     {
-      "id": "2",
-      "content": "Todo 2",
-      "isDone": true
-    },
-    {
-      "id": "3",
-      "content": "Todo 3",
-      "isDone": false
-    },
-    {
-      "id": "860c",
+      "id": "2c60",
       "content": "123",
-      "isDone": false
-    },
-    {
-      "id": "cf3c",
-      "content": "123",
-      "isDone": false
-    },
-    {
-      "id": "5a90",
-      "content": "234",
-      "isDone": false
-    },
-    {
-      "id": "0008",
-      "content": "345",
-      "isDone": false
-    },
-    {
-      "id": "67af",
-      "content": "fjfjf",
-      "isDone": false
-    },
-    {
-      "id": "d51b",
-      "content": "닭도리탕 먹기",
       "isDone": false
     }
   ],
