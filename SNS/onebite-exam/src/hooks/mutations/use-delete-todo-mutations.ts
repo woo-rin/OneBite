@@ -8,7 +8,6 @@ export function useDeleteTodoMutation() {
 
   return useMutation({
     mutationFn: delelteTodo,
-
     onSuccess: (deleltedTodo) => {
       queryClinet.setQueryData<Todo[]>(QUERY_KEYS.todo.list, (prevTodos) => {
         if (!prevTodos) return [];
