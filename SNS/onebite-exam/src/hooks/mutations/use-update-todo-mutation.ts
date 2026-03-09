@@ -1,13 +1,7 @@
 import { updateTodo } from "@/api/update-todo";
 import { QUERY_KEYS } from "@/lib/constants";
 import type { Todo } from "@/types";
-import {
-  QueriesObserver,
-  useMutation,
-  useQueries,
-  useQueryClient,
-} from "@tanstack/react-query";
-import type { Variable } from "lucide-react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export function useUpdateTodoMutation() {
   const queryClient = useQueryClient();
@@ -16,35 +10,34 @@ export function useUpdateTodoMutation() {
     mutationFn: updateTodo,
     onMutate: async (updatedTodo) => {
       await queryClient.cancelQueries({
-        queryKey: QUERY_KEYS.todo.list,
+        queryKey: QUERY_KEYS.todo.detail(updatedTodo.id),
       });
 
-      const prevTodos = queryClient.getQueryData<Todo[]>(QUERY_KEYS.todo.list);
-      queryClient.setQueryData<Todo[]>(QUERY_KEYS.todo.list, (prevTodos) => {
-        if (!prevTodos) return [];
-        return prevTodos.map((prevTodo) =>
-          prevTodo.id === updatedTodo.id
-            ? { ...prevTodo, ...updatedTodo }
-            : prevTodo,
-        );
-      });
+      const prevTodo = queryClient.getQueryData<Todo>(
+        QUERY_KEYS.todo.detail(updatedTodo.id),
+      );
 
+      queryClient.setQueryData<Todo>(
+        QUERY_KEYS.todo.detail(updatedTodo.id),
+        (prevTodo) => {
+          if (!prevTodo) return;
+          return {
+            ...prevTodo,
+            ...updateTodo,
+          };
+        },
+      );
       return {
-        prevTodos,
+        prevTodo,
       };
     },
     onError: (error, Variable, context) => {
-      if (context && context.prevTodos) {
-        queryClient.setQueryData<Todo[]>(
-          QUERY_KEYS.todo.list,
-          context.prevTodos,
+      if (context && context.prevTodo) {
+        queryClient.setQueryData<Todo>(
+          QUERY_KEYS.todo.detail(context.prevTodo.id),
+          context.prevTodo,
         );
       }
-    },
-    onSettled: () => {
-      queryClient.invalidateQueries({
-        queryKey: QUERY_KEYS.todo.list,
-      });
     },
   });
 }

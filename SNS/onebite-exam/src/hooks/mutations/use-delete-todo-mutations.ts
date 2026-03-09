@@ -9,10 +9,16 @@ export function useDeleteTodoMutation() {
   return useMutation({
     mutationFn: delelteTodo,
     onSuccess: (deleltedTodo) => {
-      queryClinet.setQueryData<Todo[]>(QUERY_KEYS.todo.list, (prevTodos) => {
-        if (!prevTodos) return [];
-        return prevTodos.filter((prevTodo) => prevTodo.id !== deleltedTodo.id);
+      queryClinet.removeQueries({
+        queryKey: QUERY_KEYS.todo.detail(deleltedTodo.id),
       });
+      queryClinet.setQueryData<string[]>(
+        QUERY_KEYS.todo.list,
+        (prevTodoIds) => {
+          if (!prevTodoIds) return [];
+          return prevTodoIds.filter((id) => id !== deleltedTodo.id);
+        },
+      );
     },
   });
 }
