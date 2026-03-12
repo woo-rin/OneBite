@@ -1,3 +1,3 @@
-export default function ProfiledetailPage() {
-  return <div>ForgetPasswordPage</div>;
+export default function ProfileDetailPage() {
+  return <div>ProfileDetailPage</div>;
 }

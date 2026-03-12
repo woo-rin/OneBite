@@ -1,3 +1,3 @@
-export default function PostdetailPage() {
-  return <div>ForgetPasswordPage</div>;
+export default function PostDetailPage() {
+  return <div>PostDetailPage</div>;
 }
