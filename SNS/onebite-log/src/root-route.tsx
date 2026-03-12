@@ -4,7 +4,7 @@ import IndexPage from "@/pages/index-page";
 import PostDetailPage from "@/pages/post-detail-page";
 import ProfileDetailPage from "@/pages/profile-detail-page";
 import ResetPasswordPage from "@/pages/reset-password-page";
-import SignInPage from "@/pages/sign-in-page";
+import SignInPage from "./pages/sign-in-page";
 import SignUpPage from "@/pages/sign-up-page";
 import { Navigate, Route, Routes } from "react-router";
 
