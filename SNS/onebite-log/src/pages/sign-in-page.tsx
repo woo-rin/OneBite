@@ -5,24 +5,34 @@ import { useState } from "react";
 import { Link } from "react-router";
 import githublogo from "@/assets/github-mark.svg";
 import { useSignInwithOAuth } from "@/hooks/mutations/use-sign-in-with-Oauth";
+import { toast } from "sonner";
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { mutate: signwithPassword } = useSignInwithPassword();
+  const { mutate: signwithPassword } = useSignInwithPassword({
+    onError: (error) => {
+      toast.error(error.message, {
+        position: "top-center",
+      });
+
+      setPassword("");
+    },
+  });
   const { mutate: signInwithOauth } = useSignInwithOAuth();
 
-  const handleSignInwithPasswordClick = () => {
+  const handleSignInWithPasswordClick = () => {
     if (email.trim() === "") return;
     if (password.trim() === "") return;
+
+    signwithPassword({
+      email,
+      password,
+    });
   };
   const handlesignInwithGitHubClick = () => {
     signInwithOauth("github");
-  };
-  const handleSignUpClick = () => {
-    if (email.trim() === "") return;
-    if (password.trim() === "") return;
   };
 
   return (
@@ -45,7 +55,7 @@ export default function SignInPage() {
         />
       </div>
       <div className="flex flex-col gap-2">
-        <Button onClick={handleSignInwithPasswordClick} className="w-full">
+        <Button onClick={handleSignInWithPasswordClick} className="w-full">
           로그인
         </Button>
         <Button
