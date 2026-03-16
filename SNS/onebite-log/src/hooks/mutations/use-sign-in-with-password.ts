@@ -1,10 +1,10 @@
-import { signInwithPassword } from "@/api/auth";
-import type { useMutationCallback } from "@/types";
+import { signInWithPassword } from "@/api/auth";
+import type { UseMutationCallback } from "@/types";
 import { useMutation } from "@tanstack/react-query";
 
-export function useSignInwithPassword(callbacks?: useMutationCallback) {
+export function useSignInWithPassword(callbacks?: UseMutationCallback) {
   return useMutation({
-    mutationFn: signInwithPassword,
+    mutationFn: signInWithPassword,
     onError: (error) => {
       console.error(error);
 

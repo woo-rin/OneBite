@@ -17,7 +17,7 @@ export async function signUp({
   return data;
 }
 
-export async function signInwithPassword({
+export async function signInWithPassword({
   email,
   password,
 }: {
@@ -32,10 +32,12 @@ export async function signInwithPassword({
   if (error) throw error;
   return data;
 }
-export async function signInwithOath(provider: Provider) {
+
+export async function signInWithOAuth(provider: Provider) {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider,
   });
+
   if (error) throw error;
   return data;
 }
@@ -53,6 +55,7 @@ export async function updatePassword(password: string) {
   const { data, error } = await supabase.auth.updateUser({
     password,
   });
+
   if (error) throw error;
   return data;
 }

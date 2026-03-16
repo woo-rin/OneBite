@@ -15,7 +15,7 @@ export function useProfileData(userId?: string) {
         const profile = await fetchProfile(userId!);
         return profile;
       } catch (error) {
-        if ((error as PostgrestError).code === "PGRST116") {
+        if (isMine && (error as PostgrestError).code === "PGRST116") {
           return await createProfile(userId!);
         }
         throw error;

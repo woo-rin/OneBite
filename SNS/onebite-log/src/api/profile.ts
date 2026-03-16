@@ -7,6 +7,7 @@ export async function fetchProfile(userId: string) {
     .select("*")
     .eq("id", userId)
     .single();
+
   if (error) throw error;
   return data;
 }
@@ -20,6 +21,7 @@ export async function createProfile(userId: string) {
     })
     .select()
     .single();
+
   if (error) throw error;
   return data;
 }

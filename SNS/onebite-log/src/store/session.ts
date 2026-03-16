@@ -1,5 +1,4 @@
 import type { Session } from "@supabase/supabase-js";
-import { Store } from "lucide-react";
 import { create } from "zustand";
 import { combine, devtools } from "zustand/middleware";
 
@@ -17,7 +16,7 @@ const useSessionStore = create(
   devtools(
     combine(initialState, (set) => ({
       actions: {
-        setsession: (session: Session | null) => {
+        setSession: (session: Session | null) => {
           set({ session, isLoaded: true });
         },
       },
@@ -27,17 +26,18 @@ const useSessionStore = create(
     },
   ),
 );
+
 export const useSession = () => {
   const session = useSessionStore((store) => store.session);
   return session;
 };
 
 export const useIsSessionLoaded = () => {
-  const isSessionLoaded = useSessionStore((Store) => Store.isLoaded);
+  const isSessionLoaded = useSessionStore((store) => store.isLoaded);
   return isSessionLoaded;
 };
 
 export const useSetSession = () => {
-  const setsession = useSessionStore((store) => store.actions.setsession);
-  return setsession;
+  const setSession = useSessionStore((store) => store.actions.setSession);
+  return setSession;
 };
