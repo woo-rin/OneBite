@@ -2,9 +2,8 @@ import Fallback from "@/components/fallback";
 import Loader from "@/components/loader";
 import PostItem from "@/components/post/post-item";
 import { useInfinitePostsData } from "@/hooks/queries/use-infinite-posts-data";
-import { useInfiniteQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { useInView, useOnInView } from "react-intersection-observer";
+import { useInView } from "react-intersection-observer";
 
 export default function PostFeed() {
   const { data, error, isPending, fetchNextPage, isFetchingNextPage } =
@@ -26,6 +25,7 @@ export default function PostFeed() {
         page.map((post) => <PostItem key={post.id} {...post} />),
       )}
       {isFetchingNextPage && <Loader />}
+
       <div ref={ref}></div>
     </div>
   );
