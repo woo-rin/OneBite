@@ -34,7 +34,11 @@ const Register = () => {
         </select>
       </div>
       <div>
-        <textarea value={dio} onChange={SetBio}></textarea>
+        <textarea
+          value={dio}
+          onChange={SetBio}
+          placeholder="자기소개를 입력해주세요."
+        ></textarea>
       </div>
     </div>
   );
