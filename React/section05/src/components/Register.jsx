@@ -1,44 +1,64 @@
-import { useState } from 'react';
+import { useState } from "react";
+// 간단한 회원가입 폼
+// 1. 이름
+// 2. 생년월일
+// 3. 국적
+// 4. 자기소개
 
 const Register = () => {
-  const [name, Setname] = useState('이름');
-  const [birth, SetBirth] = useState('');
-  const [country, SetCountry] = useState('');
-  const [dio, SetBio] = useState('');
-  const onChangeName = (e) => {
-    Setname(e.taget.value);
+  const [input, setInput] = useState({
+    name: "",
+    gender: "",
+    bio: "",
+  });
+
+  const onChange = (e) => {
+    console.log(e.target.name + " : " + e.target.value);
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
   };
-  const onChangeBirth = (e) => {
-    SetBirth(e.taget.value);
-  };
-  const onChangeCounntry = (e) => {
-    SetCountry(e.taget.value);
-  };
-  const onChangeBio = (e) => {
-    SetBio(e.taget.value);
-  };
+
   return (
     <div>
       <div>
-        <input value={name} onChange={onChangeName} placeholder={'이름'} />
+        <input
+          name="name"
+          value={input.name}
+          onChange={onChange}
+          placeholder={"이름"}
+        />
       </div>
+
       <div>
-        <input value={birth} onChange={onChangeBirth} type="date" />
+        <input
+          name="birth"
+          value={input.birth}
+          onChange={onChange}
+          type="date"
+        />
       </div>
+
       <div>
-        <select value={country} onChange={onChangeCounntry}>
-          <option>국가</option>
-          <option value={'KR'}>한국</option>
-          <option value={'US'}>미국</option>
-          <option value={'UK'}>영국</option>
+        <select
+          name="country"
+          value={input.country}
+          onChange={onChange}
+        >
+          <option value=""></option>
+          <option value="kr">한국</option>
+          <option value="us">미국</option>
+          <option value="uk">영국</option>
         </select>
       </div>
+
       <div>
         <textarea
-          value={dio}
-          onChange={SetBio}
-          placeholder="자기소개를 입력해주세요."
-        ></textarea>
+          name="bio"
+          value={input.bio}
+          onChange={onChange}
+        />
       </div>
     </div>
   );
